@@ -2,6 +2,6 @@
 {
     public interface IProductCategoryRepository
     {
-        List<ProductCategory> getAllProductCategories ();
+        List<ProductCategory> GetAllProductCategories ();
     }
 }
