@@ -10,18 +10,14 @@ namespace SM.Infrastructure.EFCore
         public DbSet<ProductCategory> ProductCategories { get; set; }
         public DbSet<Product> Products { get; set; }
 
-
         public StoreContext(DbContextOptions options) : base(options)
         {
         }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             var assembly = typeof(ProductCategoryMapping).Assembly;
             modelBuilder.ApplyConfigurationsFromAssembly(assembly);
-
 
             base.OnModelCreating(modelBuilder);
         }

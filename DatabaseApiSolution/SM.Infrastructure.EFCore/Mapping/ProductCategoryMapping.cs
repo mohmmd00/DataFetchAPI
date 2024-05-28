@@ -11,10 +11,8 @@ namespace SM.Infrastructure.EFCore.Mapping
             builder.ToTable("ProductCategories");
             builder.HasKey(x => x.Id);
 
-
             builder.Property(x => x.CategoryName).HasMaxLength(255).IsRequired();
             builder.Property(x => x.CategoryDescription).HasMaxLength(500).IsRequired();
-
 
             builder.HasMany(x => x.Products).WithOne(x => x.Category).HasForeignKey(x => x.ProductCategoryId);
         }

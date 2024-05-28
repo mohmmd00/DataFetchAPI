@@ -12,19 +12,16 @@ namespace SM.Application
             _repository = repository;
         }
 
-        public ProductViewModel FetchChosenProductBy(int id)
+        public ProductViewModel FetchChosenProductBy(int ProductId)
         {
 
-            var SelectedProduct = _repository.GetProductBy(id);
+            var SelectedProduct = _repository.GetProductBy(ProductId);
             var result = new ProductViewModel()
             {
                 Name = SelectedProduct.ProductName,
                 Description = SelectedProduct.ProductDescription,
                 ProductCategoryId = SelectedProduct.ProductCategoryId
             };
-            
-
-
             return result;
         }
 
@@ -32,7 +29,6 @@ namespace SM.Application
         {
             var Products = _repository.GetAllProducts();
             var result = new List<ProductViewModel>();
-
             foreach (var Product in Products)
             {
                 result.Add(new ProductViewModel
@@ -40,6 +36,23 @@ namespace SM.Application
                     Name = Product.ProductName,
                     Description = Product.ProductDescription,
                     ProductCategoryId = Product.ProductCategoryId
+                });
+            }
+            return result;
+        }
+
+        public List<ProductViewModel> FetchSomeProductsFilteredby(int ProductId)
+        {
+            var products = _repository.GetProductsWithSameCategoryBy(ProductId);
+            var result = new List<ProductViewModel>();
+            foreach (var Product in products)
+            {
+                result.Add(new ProductViewModel
+                {
+                    Name = Product.ProductName,
+                    Description = Product.ProductDescription,
+                    ProductCategoryId = Product.ProductCategoryId
+
                 });
             }
             return result;

@@ -4,8 +4,9 @@ namespace SM.Application.Contracts.ProductAgg
 {
     public interface IProductApplication
     {
-        ProductViewModel FetchChosenProductBy(int id);
+        ProductViewModel FetchChosenProductBy(int ProductId);
         List<ProductViewModel> FetchAllProducts();
+        List<ProductViewModel> FetchSomeProductsFilteredby(int ProductId);
 
     }
 }

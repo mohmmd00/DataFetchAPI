@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SM.Application.Contracts.ProductAgg;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ServiceHost.Controllers
 {
@@ -16,12 +15,13 @@ namespace ServiceHost.Controllers
             _application = application;
         }
 
-
         // GET: api/<ProductsController>
         [HttpGet]
         public List<ProductViewModel> GetAllProducts()
         {
-            return _application.FetchAllProducts();
+            var Products =_application.FetchAllProducts();
+
+            return Products;
         }
 
         // GET api/<ProductsController>/
@@ -32,5 +32,14 @@ namespace ServiceHost.Controllers
 
             return ChosenProduct;
         }
+
+        [HttpGet("{id}/recommendation")]
+        public List<ProductViewModel> GetRecommendationListBy(int id)
+        {
+            var ChosenProducts =  _application.FetchSomeProductsFilteredby(id);
+           
+            return ChosenProducts;
+        }
+
     }
 }
