@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Security.Cryptography.X509Certificates;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SM.Domain.ProductAgg;
 
@@ -15,7 +16,7 @@ namespace SM.Infrastructure.EFCore.Mapping
             builder.Property(x => x.ProductDescription).HasMaxLength(500).IsRequired();
 
 
-
+            builder.HasOne(x =>x.Category).WithMany(x=>x.Products).HasForeignKey(x=>x.ProductCategoryId);
         }
     }
 }
