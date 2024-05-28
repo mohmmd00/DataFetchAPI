@@ -19,13 +19,7 @@ namespace SM.Infrastructure.EFCore.Repository
         public Product GetProductBy(int productId)
         {
             var ChosenProduct = _context.Products.Find(productId);
-
-            if (ChosenProduct != null)
-            {
-                return ChosenProduct;
-            }
-
-            return null;
+            return ChosenProduct;
         }
 
         public List<Product> GetAllProducts()

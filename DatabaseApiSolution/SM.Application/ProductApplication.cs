@@ -12,21 +12,37 @@ namespace SM.Application
             _repository = repository;
         }
 
-        public Product FetchChosenProductBy(int id)
+        public ProductViewModel FetchChosenProductBy(int id)
         {
 
             var SelectedProduct = _repository.GetProductBy(id);
-            if (SelectedProduct != null)
+            var result = new ProductViewModel()
             {
-                return SelectedProduct;
-            }
+                Name = SelectedProduct.ProductName,
+                Description = SelectedProduct.ProductDescription,
+                ProductCategoryId = SelectedProduct.ProductCategoryId
+            };
+            
 
-            return null;
+
+            return result;
         }
 
-        public List<Product> FetchAllProducts()
+        public List<ProductViewModel> FetchAllProducts()
         {
-            return _repository.GetAllProducts();
+            var Products = _repository.GetAllProducts();
+            var result = new List<ProductViewModel>();
+
+            foreach (var Product in Products)
+            {
+                result.Add(new ProductViewModel
+                {
+                    Name = Product.ProductName,
+                    Description = Product.ProductDescription,
+                    ProductCategoryId = Product.ProductCategoryId
+                });
+            }
+            return result;
         }
     }
 }
