@@ -17,27 +17,56 @@ namespace ServiceHost.Controllers
 
         // GET: api/<ProductsController>
         [HttpGet]
-        public List<ProductViewModel> GetAllProducts()
+        public ActionResult<List<ProductViewModel>> GetAllProducts()
         {
-            var Products =_application.FetchAllProducts();
+            var Products = _application.FetchAllProducts();
+            if (Products == null)
+            {
+                return NotFound("cant find any products");
+            }
 
             return Products;
         }
 
         // GET api/<ProductsController>/
         [HttpGet("{id}")]
-        public ProductViewModel GetASingleProduct(int id)
+        public ActionResult<ProductViewModel> GetSelectedProduct(int id)
         {
+
+            //input cant be negative or zero 
+            if (id <= 0)
+
+            {
+                return BadRequest("input cant be negative or zero");
+            }
+
             var ChosenProduct = _application.FetchChosenProductBy(id);
+
+            //ProductViewModel cant be null
+            if (ChosenProduct == null)
+            {
+                return NotFound("The product you are looking for was not found");
+            }
 
             return ChosenProduct;
         }
 
         [HttpGet("{id}/recommendation")]
-        public List<ProductViewModel> GetRecommendationListBy(int id)
+        public ActionResult<List<ProductViewModel>> GetRecommendationListBy(int id)
         {
-            var ChosenProducts =  _application.FetchSomeProductsFilteredby(id);
-           
+            //input cant be negative or zero
+            if (id <= 0)
+            {
+                return BadRequest("Input cant be negative or zero");
+            }
+            var ChosenProducts = _application.FetchSomeProductsProcessedby(id);
+            //ProductViewModel processed list cant be null
+
+            if (ChosenProducts == null)
+            {
+                return NotFound("cant find any products with similar category");
+            }
+
             return ChosenProducts;
         }
 

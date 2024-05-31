@@ -9,56 +9,37 @@ namespace SM.Infrastructure.EFCore.Repository
         {
             _context = context;
         }
-        public Product GetProductBy(int productId)
-        {
-
-            if (productId <= 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(productId), "ProductId must be a positive integer.");
-            }
-
-            Product chosenProduct;
-            try
-            {
-                chosenProduct = _context.Products.Find(productId);
-            }
-            catch (NullReferenceException)
-            {
-                return null; 
-            }
-
-            return chosenProduct;
-        }
         public List<Product> GetAllProducts()
         {
             return _context.Products.ToList();
         }
-        public List<Product> GetProductsWithSameCategoryBy(int productId)
+        public Product GetProductBy(int productId)
         {
-            if (productId <= 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(productId), "ProductId must be a positive integer.");
-            }
-            Product product;
-            try
-            {
-                product = _context.Products.Find(productId);
-            }
-            catch (NullReferenceException)
-            {
+            var SelectedProduct = _context.Products.Find(productId);
 
-                return new List<Product>();
+            if (SelectedProduct != null)
+            {
+                return SelectedProduct;
             }
-            if (product != null)
+            else
+            {
+                return null;
+            }
+        }
+
+        public List<Product> GetProductsWithSameCategoryBy(int productid)
+        {
+            var SelectedProduct = _context.Products.Find(productid);
+
+            if (SelectedProduct != null)
             {
                 var products = _context.Products
-                    .Where(p => p.ProductCategoryId == product.ProductCategoryId && p.Id != productId)
+                    .Where(p => p.ProductCategoryId == SelectedProduct.ProductCategoryId && p.Id != productid)
                     .ToList();
                 return products;
             }
 
-
-            return new List<Product>();
+            return null;
         }
 
 

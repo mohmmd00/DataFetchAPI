@@ -1,4 +1,5 @@
-﻿using SM.Application.Contracts.ProductAgg;
+﻿using System.Net;
+using SM.Application.Contracts.ProductAgg;
 using SM.Domain.ProductAgg;
 
 namespace SM.Application
@@ -12,17 +13,25 @@ namespace SM.Application
             _repository = repository;
         }
 
-        public ProductViewModel FetchChosenProductBy(int ProductId)
+        public ProductViewModel FetchChosenProductBy(int productid)
         {
-
-            var SelectedProduct = _repository.GetProductBy(ProductId);
-            var result = new ProductViewModel()
+            var product = _repository.GetProductBy(productid);
+            if (product == null)
             {
-                Name = SelectedProduct.ProductName,
-                Description = SelectedProduct.ProductDescription,
-                ProductCategoryId = SelectedProduct.ProductCategoryId
-            };
-            return result;
+                return null;
+            }
+            else
+            {
+                var result = new ProductViewModel()
+                {
+                    Name = product.ProductName,
+                    Description = product.ProductDescription,
+                    ProductCategoryId = product.ProductCategoryId
+                };
+                return result;
+            }
+
+
         }
 
         public List<ProductViewModel> FetchAllProducts()
@@ -41,21 +50,30 @@ namespace SM.Application
             return result;
         }
 
-        public List<ProductViewModel> FetchSomeProductsFilteredby(int ProductId)
+        public List<ProductViewModel> FetchSomeProductsProcessedby(int ProductId)
         {
             var products = _repository.GetProductsWithSameCategoryBy(ProductId);
-            var result = new List<ProductViewModel>();
-            foreach (var Product in products)
-            {
-                result.Add(new ProductViewModel
-                {
-                    Name = Product.ProductName,
-                    Description = Product.ProductDescription,
-                    ProductCategoryId = Product.ProductCategoryId
 
-                });
+            if (products == null)
+            {
+                return null;
             }
-            return result;
+            else
+            {
+                var result = new List<ProductViewModel>();
+                foreach (var Product in products)
+                {
+                    result.Add(new ProductViewModel
+                    {
+                        Name = Product.ProductName,
+                        Description = Product.ProductDescription,
+                        ProductCategoryId = Product.ProductCategoryId
+
+                    });
+                }
+                return result;
+            }
+
         }
     }
 }

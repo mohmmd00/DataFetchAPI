@@ -4,6 +4,6 @@
     {
         Product GetProductBy(int productId);
         List<Product> GetAllProducts ();
-        List<Product> GetProductsWithSameCategoryBy(int Productid);
+        List<Product> GetProductsWithSameCategoryBy(int productid);
     }
 }
