@@ -12,8 +12,11 @@ namespace SM.Infrastructure.EFCore.Mapping
             builder.ToTable("Products");
             builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.ProductName).HasMaxLength(255).IsRequired();
-            builder.Property(x => x.ProductDescription).HasMaxLength(500).IsRequired();
+            builder.Property(x => x.Name).HasMaxLength(255).IsRequired();
+            builder.Property(x => x.Description).HasMaxLength(500).IsRequired();
+            builder.Property(x => x.Quantity).HasMaxLength(20).IsRequired();
+            builder.Property(x=>x.Price).HasMaxLength(20).IsRequired();
+
 
             builder.HasOne(x =>x.Category).WithMany(x=>x.Products).HasForeignKey(x=>x.ProductCategoryId);
         }

@@ -13,17 +13,32 @@ namespace SM.Infrastructure.EFCore.Repository
         {
             return _context.Products.ToList();
         }
+
+        public List<Product> GetOutOfStockProducts()
+        {
+            var outofstock = _context.Products.Where(x=>x.Quantity == 0).ToList();
+
+            if (outofstock == null)
+            {
+                return null;
+            }
+            else
+            {
+                return outofstock;
+            }
+        }
+
         public Product GetProductBy(int productId)
         {
             var SelectedProduct = _context.Products.Find(productId);
 
-            if (SelectedProduct != null)
+            if (SelectedProduct == null)
             {
-                return SelectedProduct;
+                return null;
             }
             else
             {
-                return null;
+                return SelectedProduct;
             }
         }
 
@@ -31,15 +46,20 @@ namespace SM.Infrastructure.EFCore.Repository
         {
             var SelectedProduct = _context.Products.Find(productid);
 
-            if (SelectedProduct != null)
+            if (SelectedProduct == null)
+            {
+                return null;
+            }
+            else
             {
                 var products = _context.Products
                     .Where(p => p.ProductCategoryId == SelectedProduct.ProductCategoryId && p.Id != productid)
                     .ToList();
+
                 return products;
             }
 
-            return null;
+           
         }
 
 

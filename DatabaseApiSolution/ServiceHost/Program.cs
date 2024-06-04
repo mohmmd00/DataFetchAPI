@@ -7,13 +7,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 //loading env file 
 Env.TraversePath().Load();
-var ConnectionString001 = System.Environment.GetEnvironmentVariable("CONNECTION_STRING");
+var ConnectionString = System.Environment.GetEnvironmentVariable("CONNECTION_STRING");
 
 
 
 
 // Add services to the container.
-StoreManagementBootstrapper.Configure(builder.Services , ConnectionString001);
+StoreManagementBootstrapper.Configure(builder.Services , ConnectionString);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

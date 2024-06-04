@@ -24,9 +24,12 @@ namespace SM.Application
             {
                 var result = new ProductViewModel()
                 {
-                    Name = product.ProductName,
-                    Description = product.ProductDescription,
-                    ProductCategoryId = product.ProductCategoryId
+                    Id = product.Id,
+                    Name = product.Name,
+                    Description = product.Description,
+                    Category = product.Category.Name,
+                    Price = product.Price,
+                    Quantity = product.Quantity
                 };
                 return result;
             }
@@ -36,18 +39,50 @@ namespace SM.Application
 
         public List<ProductViewModel> FetchAllProducts()
         {
-            var Products = _repository.GetAllProducts();
+            var products = _repository.GetAllProducts();
             var result = new List<ProductViewModel>();
-            foreach (var Product in Products)
+            foreach (var product in products)
             {
                 result.Add(new ProductViewModel
                 {
-                    Name = Product.ProductName,
-                    Description = Product.ProductDescription,
-                    ProductCategoryId = Product.ProductCategoryId
+                    Id = product.Id,
+                    Name = product.Name,
+                    Description = product.Description,
+                    Category = product.Category.Name,
+                    Price = product.Price,
+                    Quantity = product.Quantity
+
                 });
             }
             return result;
+        }
+
+        public List<ProductViewModel> FetchOutOfStockProducts()
+        {
+            var products = _repository.GetOutOfStockProducts();
+            
+            if (products == null)
+            {
+                return null;
+            }
+            else
+            {
+                var result = new List<ProductViewModel>();
+                foreach (var product in products)
+                {
+                    result.Add(new ProductViewModel
+                    {
+                        Id = product.Id,
+                        Name = product.Name,
+                        Description = product.Description,
+                        Category = product.Category.Name,
+                        Price = product.Price,
+                        Quantity = product.Quantity
+                    });
+                }
+                return result;
+                
+            }
         }
 
         public List<ProductViewModel> FetchSomeProductsProcessedby(int ProductId)
@@ -61,14 +96,16 @@ namespace SM.Application
             else
             {
                 var result = new List<ProductViewModel>();
-                foreach (var Product in products)
+                foreach (var product in products)
                 {
                     result.Add(new ProductViewModel
                     {
-                        Name = Product.ProductName,
-                        Description = Product.ProductDescription,
-                        ProductCategoryId = Product.ProductCategoryId
-
+                        Id = product.Id,
+                        Name = product.Name,
+                        Description = product.Description,
+                        Category = product.Category.Name,
+                        Price = product.Price,
+                        Quantity = product.Quantity
                     });
                 }
                 return result;
