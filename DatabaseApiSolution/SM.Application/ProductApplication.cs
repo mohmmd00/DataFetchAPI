@@ -22,12 +22,13 @@ namespace SM.Application
             }
             else
             {
-                var result = new ProductViewModel()
+                var categoryname = _repository.GetCategoryNameBy(productid);
+                var result = new ProductViewModel
                 {
                     Id = product.Id,
                     Name = product.Name,
                     Description = product.Description,
-                    Category = product.Category.Name,
+                    Category = categoryname,
                     Price = product.Price,
                     Quantity = product.Quantity
                 };
@@ -43,12 +44,13 @@ namespace SM.Application
             var result = new List<ProductViewModel>();
             foreach (var product in products)
             {
+                var categoryname = _repository.GetCategoryNameBy(product.Id);
                 result.Add(new ProductViewModel
                 {
                     Id = product.Id,
                     Name = product.Name,
                     Description = product.Description,
-                    Category = product.Category.Name,
+                    Category = categoryname,
                     Price = product.Price,
                     Quantity = product.Quantity
 
@@ -60,7 +62,7 @@ namespace SM.Application
         public List<ProductViewModel> FetchOutOfStockProducts()
         {
             var products = _repository.GetOutOfStockProducts();
-            
+
             if (products == null)
             {
                 return null;
@@ -70,18 +72,19 @@ namespace SM.Application
                 var result = new List<ProductViewModel>();
                 foreach (var product in products)
                 {
+                    var categoryname = _repository.GetCategoryNameBy(product.Id);
                     result.Add(new ProductViewModel
                     {
                         Id = product.Id,
                         Name = product.Name,
                         Description = product.Description,
-                        Category = product.Category.Name,
+                        Category = categoryname,
                         Price = product.Price,
                         Quantity = product.Quantity
                     });
                 }
                 return result;
-                
+
             }
         }
 
@@ -98,12 +101,13 @@ namespace SM.Application
                 var result = new List<ProductViewModel>();
                 foreach (var product in products)
                 {
+                    var categoryname = _repository.GetCategoryNameBy(product.Id);
                     result.Add(new ProductViewModel
                     {
                         Id = product.Id,
                         Name = product.Name,
                         Description = product.Description,
-                        Category = product.Category.Name,
+                        Category = categoryname,
                         Price = product.Price,
                         Quantity = product.Quantity
                     });

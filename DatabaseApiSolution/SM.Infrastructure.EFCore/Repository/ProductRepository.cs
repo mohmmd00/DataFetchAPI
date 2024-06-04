@@ -62,6 +62,20 @@ namespace SM.Infrastructure.EFCore.Repository
            
         }
 
+        public string GetCategoryNameBy(int productid)
+        {
+            var SelectedProduct = _context.Products.Find(productid);
 
+            var CategoryName = _context.ProductCategories.FirstOrDefault(X => X.Id == SelectedProduct.ProductCategoryId).Name;
+
+            if (SelectedProduct == null)
+            {
+                return null;
+            }
+            else
+            {
+                return CategoryName;
+            }
+        }
     }
 }

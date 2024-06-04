@@ -6,5 +6,6 @@
         List<Product> GetAllProducts ();
         List<Product> GetOutOfStockProducts();
         List<Product> GetProductsWithSameCategoryBy(int productid);
+        string GetCategoryNameBy(int productid);
     }
 }
