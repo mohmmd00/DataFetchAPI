@@ -30,30 +30,30 @@ namespace SM.Infrastructure.EFCore.Repository
 
         public Product GetProductBy(int productId)
         {
-            var SelectedProduct = _context.Products.Find(productId);
+            var selectedproduct = _context.Products.Find(productId);
 
-            if (SelectedProduct == null)
+            if (selectedproduct == null)
             {
                 return null;
             }
             else
             {
-                return SelectedProduct;
+                return selectedproduct;
             }
         }
 
         public List<Product> GetProductsWithSameCategoryBy(int productid)
         {
-            var SelectedProduct = _context.Products.Find(productid);
+            var selectedproduct = _context.Products.Find(productid);
 
-            if (SelectedProduct == null)
+            if (selectedproduct == null)
             {
                 return null;
             }
             else
             {
                 var products = _context.Products
-                    .Where(p => p.ProductCategoryId == SelectedProduct.ProductCategoryId && p.Id != productid)
+                    .Where(p => p.ProductCategoryId == selectedproduct.ProductCategoryId && p.Id != productid)
                     .ToList();
 
                 return products;
@@ -66,7 +66,7 @@ namespace SM.Infrastructure.EFCore.Repository
         {
             var SelectedProduct = _context.Products.Find(productid);
 
-            var CategoryName = _context.ProductCategories.FirstOrDefault(X => X.Id == SelectedProduct.ProductCategoryId).Name;
+            var categoryname = _context.ProductCategories.FirstOrDefault(X => X.Id == SelectedProduct.ProductCategoryId).Name;
 
             if (SelectedProduct == null)
             {
@@ -74,7 +74,7 @@ namespace SM.Infrastructure.EFCore.Repository
             }
             else
             {
-                return CategoryName;
+                return categoryname;
             }
         }
     }
