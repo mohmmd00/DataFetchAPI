@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AM.Configuration\AM.Configuration.csproj" />
     <ProjectReference Include="..\SM.Configuration\SM.Configuration.csproj" />
   </ItemGroup>
 
