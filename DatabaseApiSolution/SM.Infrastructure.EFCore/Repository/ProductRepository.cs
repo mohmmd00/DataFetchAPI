@@ -58,10 +58,7 @@ namespace SM.Infrastructure.EFCore.Repository
 
                 return products;
             }
-
-           
         }
-
         public string GetCategoryNameBy(int productid)
         {
             var SelectedProduct = _context.Products.Find(productid);

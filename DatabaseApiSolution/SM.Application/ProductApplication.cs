@@ -1,5 +1,4 @@
-﻿using System.Net;
-using SM.Application.Contracts.ProductAgg;
+﻿using SM.Application.Contracts.ProductAgg;
 using SM.Domain.ProductAgg;
 
 namespace SM.Application
