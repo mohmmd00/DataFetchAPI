@@ -2,7 +2,7 @@
 {
     public interface IAccountApplication
     {
-        void Register(AccountViewModel command);
+        bool Register(AccountViewModel command);
         bool Login(AccountViewModel command);
     }
 }

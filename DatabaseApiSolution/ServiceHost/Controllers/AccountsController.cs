@@ -1,6 +1,5 @@
 ﻿using AM.Application.Contracts.AccountAgg;
 using AM_Domain.AccountAgg;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ServiceHost.Controllers
@@ -18,18 +17,36 @@ namespace ServiceHost.Controllers
 
 
         [HttpPost("RegisterAccount")]
-        public ActionResult<Account> Register(AccountViewModel command)
+        public ActionResult<string> CreateNewAccount(AccountViewModel command)
         {
-            _application.Register(command);
-            return Ok();
+            bool operation = _application.Register(command);
+
+            if (operation)
+            {
+                return Ok("operation was successful");
+            }
+            else
+            {
+                return BadRequest($"{command.UserName} is already exist");
+            }
+            
         }
 
 
         [HttpPost("LoginAccount")]
         public ActionResult<string> Login(AccountViewModel command)
         {
-            var check = _application.Login(command);
-            return Ok(check);
+            bool operation = _application.Login(command);
+
+            if (operation)
+            {
+                return Ok("operation was successful");
+            }
+            else
+            {
+                return BadRequest("username or password is not correct");
+            }
+            
         }
     }
 }

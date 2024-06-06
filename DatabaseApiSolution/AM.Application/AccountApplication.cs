@@ -21,8 +21,7 @@ namespace AM.Application
                 passwordhash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
             }
         }
-
-        private bool VerifiedPasswordHash(string password , byte[] hash , byte[] salt)
+        private bool VerifiedPasswordHash(string password, byte[] hash, byte[] salt)
         {
             using (var hmac = new HMACSHA512(salt))
             {
@@ -32,32 +31,51 @@ namespace AM.Application
         }
 
 
-        public void Register(AccountViewModel command)
+        public bool Register(AccountViewModel command)
         {
-            CreatePasswordHash(command.Password , out byte[] passwordhash , out byte[] passwordsalt);
+            bool operation = false;
+            var chosenuser = _repository.GetAccountBy(command.UserName);
 
-            var newaccount = new Account(command.UserName, passwordhash , passwordsalt);
 
-            _repository.Add(newaccount);
-            _repository.SaveChanges();
+            if (chosenuser == null)
+            {
+                operation = true;
+
+
+                CreatePasswordHash(command.Password, out byte[] passwordhash, out byte[] passwordsalt);
+                var newaccount = new Account(command.UserName, passwordhash, passwordsalt);
+
+                _repository.Add(newaccount);
+                _repository.SaveChanges();
+
+                return operation;
+            }
+            else
+            {
+                return operation;
+            }
+
         }
 
         public bool Login(AccountViewModel command)
         {
+            bool operation = false;
             var chosenuser = _repository.GetAccountBy(command.UserName);
 
             if (chosenuser == null)
             {
-                return false;
+                return operation;
             }
 
-            if (!VerifiedPasswordHash(command.Password , chosenuser.PasswordHash , chosenuser.PasswordSalt))
+            if (!VerifiedPasswordHash(command.Password, chosenuser.PasswordHash, chosenuser.PasswordSalt))
             {
-                return false;
+                return operation;
             }
-
-            return true;
-
+            else
+            {
+                operation = true;
+                return operation;
+            }
         }
     }
 }
