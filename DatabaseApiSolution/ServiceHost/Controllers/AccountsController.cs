@@ -1,5 +1,4 @@
 ﻿using AM.Application.Contracts.AccountAgg;
-using AM_Domain.AccountAgg;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ServiceHost.Controllers
@@ -10,13 +9,17 @@ namespace ServiceHost.Controllers
     {
         private readonly IAccountApplication _application;
 
-        public AccountsController(IAccountApplication application)
+
+        public AccountsController(IAccountApplication application , IConfiguration configuration)
         {
             _application = application;
         }
 
 
-        [HttpPost("RegisterAccount")]
+
+
+
+        [HttpPost("Register")]
         public ActionResult<string> CreateNewAccount(AccountViewModel command)
         {
             bool operation = _application.Register(command);
@@ -31,16 +34,15 @@ namespace ServiceHost.Controllers
             }
             
         }
-
-
-        [HttpPost("LoginAccount")]
+        [HttpPost("Login")]
         public ActionResult<string> Login(AccountViewModel command)
         {
-            bool operation = _application.Login(command);
+            string token = _application.Login(command);
+            
 
-            if (operation)
+            if (!string.IsNullOrWhiteSpace(token))
             {
-                return Ok("operation was successful");
+                return Ok(token);
             }
             else
             {

@@ -3,6 +3,6 @@
     public interface IAccountApplication
     {
         bool Register(AccountViewModel command);
-        bool Login(AccountViewModel command);
+        string Login(AccountViewModel command);
     }
 }
