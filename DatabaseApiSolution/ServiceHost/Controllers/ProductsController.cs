@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SM.Application.Contracts.ProductAgg;
 
 
@@ -30,7 +31,8 @@ namespace ServiceHost.Controllers
 
         // GET api/<ProductsController>/
         [HttpGet("{id}")]
-        public ActionResult<ProductViewModel> GetSelectedProduct(int id)
+        [Authorize]
+        public ActionResult<ProductViewModel> GetSelectedProduct(int id )
         {
 
             //input cant be negative or zero 
