@@ -51,7 +51,7 @@ Follow these steps to set up and run the project locally.
     cd DataFetchAPI
     
 2. Set up the database:
-    - Update the database connection settings in appsettings.json.
+    - Update the database connection settings in a new .env file 
 
 3. Restore dependencies:
    
@@ -66,6 +66,4 @@ The API will be accessible at http://***************/api. Below are some example
 
 - GET /api/products: Retrieve a list of all products.
 - GET /api/products/{id}: Retrieve a specific product by ID.
-
-## Contributing
-We welcome contributions from the community. To contribute:
+- GET /api/products/{id}/recommendation: Retrieve a list of similiar category by ID.
