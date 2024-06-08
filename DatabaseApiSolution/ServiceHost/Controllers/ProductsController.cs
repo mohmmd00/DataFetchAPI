@@ -31,7 +31,7 @@ namespace ServiceHost.Controllers
 
         // GET api/<ProductsController>/
         [HttpGet("{id}")]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public ActionResult<ProductViewModel> GetSelectedProduct(int id )
         {
 

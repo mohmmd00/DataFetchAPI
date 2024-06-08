@@ -41,7 +41,8 @@ namespace AM.Application
         {
             List<Claim> listclaim = new List<Claim>
             {
-                new Claim(ClaimTypes.Name , account.UserName)
+                new Claim(ClaimTypes.Name , account.UserName),
+                new Claim(ClaimTypes.Role , "Admin" )
             };
 
             var key = new SymmetricSecurityKey(
