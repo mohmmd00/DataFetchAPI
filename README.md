@@ -9,8 +9,6 @@ DataFetchAPI is a .NET application designed to retrieve data from a database and
 - [Architecture](#architecture)
 - [Getting Started](#getting-started)
 - [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 - Seamless Data Retrieval: Efficiently fetch data from a databases.
