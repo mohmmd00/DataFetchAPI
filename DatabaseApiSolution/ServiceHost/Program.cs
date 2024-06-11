@@ -1,4 +1,3 @@
-using System.Net;
 using System.Text;
 using AM.Configuration;
 using DotNetEnv;
@@ -21,14 +20,14 @@ var ConnectionString02 = System.Environment.GetEnvironmentVariable("CONNECTION_S
 
 
 // Add services to the container.
-StoreManagementBootstrapper.Configure(builder.Services , ConnectionString01);
+StoreManagementBootstrapper.Configure(builder.Services, ConnectionString01);
 AccountManagementBootstrapper.Configure(builder.Services, ConnectionString02);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
-    options.AddSecurityDefinition("oauth2" , new OpenApiSecurityScheme()
+    options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme()
     {
         Description = "Standard authorization header using bearer scheme  (\"Bearer {Token}\")",
         In = ParameterLocation.Header,
