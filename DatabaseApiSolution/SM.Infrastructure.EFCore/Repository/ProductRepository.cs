@@ -28,6 +28,11 @@ namespace SM.Infrastructure.EFCore.Repository
             }
         }
 
+        public void CraeteNewProduct(Product entity)
+        {
+            _context.Products.Add(entity);
+        }
+
         public Product GetProductBy(int productId)
         {
             var selectedproduct = _context.Products.Find(productId);
@@ -39,6 +44,22 @@ namespace SM.Infrastructure.EFCore.Repository
             else
             {
                 return selectedproduct;
+            }
+        }
+
+        public bool IsProductExistsBy(string name)
+        {
+            // returns false if there is no product by received name
+            bool status = false;
+            var selectedproduct = _context.Products.FirstOrDefault(x => x.Name == name);
+            if (selectedproduct == null)
+            {
+                return status;
+            }
+            else
+            {
+                status = true;
+                return status;
             }
         }
 
@@ -73,6 +94,11 @@ namespace SM.Infrastructure.EFCore.Repository
             {
                 return categoryname;
             }
+        }
+
+        public void SaveChanges()
+        {
+            _context.SaveChanges();
         }
     }
 }

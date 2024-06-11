@@ -86,5 +86,19 @@ namespace ServiceHost.Controllers
             }
         }
 
+        [HttpPost("createproduct")]
+        public ActionResult<string> CreateNewProduct(CreateProductModel command)
+        {
+            bool operation = _application.CreateNewProduct(command);
+            if (operation)
+            {
+                return Ok("creation was successful");
+            }
+            else
+            {
+                return BadRequest($"creation wasnt successful !");
+            }
+        }
+
     }
 }

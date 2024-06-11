@@ -12,6 +12,33 @@ namespace SM.Application
             _repository = repository;
         }
 
+        private string FetchCtegoryName(int id)
+        {
+            return _repository.GetCategoryNameBy(id);
+        }
+
+        public bool CreateNewProduct(CreateProductModel command)
+        {
+            //validation of create product model
+            bool isexist = _repository.IsProductExistsBy(command.Name);
+            bool quantityAndPrice = command.Price > 0 && command.Quantity >0;
+
+
+            if (!isexist && quantityAndPrice)
+            {
+                var newproduct = new Product(command.Name, command.Quantity, command.Price, command.Description,command.ProductCategoryId);
+
+                _repository.CraeteNewProduct(newproduct);
+                _repository.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
         public ProductViewModel FetchChosenProductBy(int productid)
         {
             var product = _repository.GetProductBy(productid);
@@ -21,13 +48,12 @@ namespace SM.Application
             }
             else
             {
-                var categoryname = _repository.GetCategoryNameBy(productid);
                 var result = new ProductViewModel
                 {
                     Id = product.Id,
                     Name = product.Name,
                     Description = product.Description,
-                    Category = categoryname,
+                    Category = FetchCtegoryName(productid),
                     Price = product.Price,
                     Quantity = product.Quantity
                 };
@@ -43,13 +69,13 @@ namespace SM.Application
             var result = new List<ProductViewModel>();
             foreach (var product in products)
             {
-                var categoryname = _repository.GetCategoryNameBy(product.Id);
+
                 result.Add(new ProductViewModel
                 {
                     Id = product.Id,
                     Name = product.Name,
                     Description = product.Description,
-                    Category = categoryname,
+                    Category = FetchCtegoryName(product.Id),
                     Price = product.Price,
                     Quantity = product.Quantity
 
@@ -71,13 +97,12 @@ namespace SM.Application
                 var result = new List<ProductViewModel>();
                 foreach (var product in products)
                 {
-                    var categoryname = _repository.GetCategoryNameBy(product.Id);
                     result.Add(new ProductViewModel
                     {
                         Id = product.Id,
                         Name = product.Name,
                         Description = product.Description,
-                        Category = categoryname,
+                        Category = FetchCtegoryName(product.Id),
                         Price = product.Price,
                         Quantity = product.Quantity
                     });
@@ -100,13 +125,12 @@ namespace SM.Application
                 var result = new List<ProductViewModel>();
                 foreach (var product in products)
                 {
-                    var categoryname = _repository.GetCategoryNameBy(product.Id);
                     result.Add(new ProductViewModel
                     {
                         Id = product.Id,
                         Name = product.Name,
                         Description = product.Description,
-                        Category = categoryname,
+                        Category = FetchCtegoryName(product.Id),
                         Price = product.Price,
                         Quantity = product.Quantity
                     });

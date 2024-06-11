@@ -12,5 +12,14 @@ namespace SM.Domain.ProductAgg
         public string Description { get; private set;}
         public int ProductCategoryId { get; private set;}
         public ProductCategory Category { get; private set; }
+
+        public Product(string name, int quantity, double price, string description, int productCategoryId)
+        {
+            Name = name;
+            Quantity = quantity;
+            Price = price;
+            Description = description;
+            ProductCategoryId = productCategoryId;
+        }
     }
 }
