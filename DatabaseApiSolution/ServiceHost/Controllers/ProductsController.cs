@@ -72,5 +72,19 @@ namespace ServiceHost.Controllers
             return ChosenProducts;
         }
 
+        [HttpGet("Outofstock")]
+        public ActionResult<List<ProductViewModel>> FetchOutOfStock()
+        {
+            var outofstockproducts = _application.FetchOutOfStockProducts();
+            if (outofstockproducts == null)
+            {
+                return NotFound("there is no out of stock product nor cant found any");
+            }
+            else
+            {
+                return outofstockproducts;
+            }
+        }
+
     }
 }
