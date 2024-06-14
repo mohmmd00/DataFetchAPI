@@ -63,6 +63,21 @@ namespace SM.Infrastructure.EFCore.Repository
             }
         }
 
+        public bool IsCategoryExistBy(int id)
+        {
+            bool status = false;
+            var chosencategory = _context.ProductCategories.Find(id);
+            if (chosencategory == null)
+            {
+                return status;
+            }
+            else
+            {
+                status = true;
+                return status;
+            }
+        }
+
         public List<Product> GetProductsWithSameCategoryBy(int productid)
         {
             var selectedproduct = _context.Products.Find(productid);

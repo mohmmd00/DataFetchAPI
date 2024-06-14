@@ -26,14 +26,16 @@ namespace SM.Application
 
             //validation of create product model
             bool productexist = _repository.IsProductExistsBy(command.Name);
+            bool categoryexist = _repository.IsCategoryExistBy(command.ProductCategoryId);
             bool pricecheck = command.Price >= 0;
             bool quantitycheck = command.Quantity >= 0;
+            
             
 
             if (productexist)
                 return operation.Failed(ApplicationMessages.DuplicatedRecord);
-            if (!pricecheck || !quantitycheck)
-                return operation.Failed(ApplicationMessages.BadInput);
+            if (!pricecheck || !quantitycheck || !categoryexist)
+                return operation.Failed(ApplicationMessages.BadInputValues);
             else
             {
                 var newproduct = new Product(command.Name, command.Quantity, command.Price, command.Description, command.ProductCategoryId);

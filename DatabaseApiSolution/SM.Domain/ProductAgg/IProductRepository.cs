@@ -11,6 +11,7 @@
         List<Product> GetProductsWithSameCategoryBy(int productid);
         string GetCategoryNameBy(int productid);
         bool IsProductExistsBy(string name);
+        bool IsCategoryExistBy(int id);
         void SaveChanges();
     }
 }

@@ -95,7 +95,9 @@ namespace ServiceHost.Controllers
         [HttpPost("createproduct")]
         public ActionResult<OperationResult> CreateNewProduct(CreateProductModel command)
         {
+            //take a CreateProductModel as a command and process it to add a new record to database through different validation
             var result = _application.CreateNewProduct(command);
+
             if (result.IsSucceded)
             {
                 return Ok(result);
