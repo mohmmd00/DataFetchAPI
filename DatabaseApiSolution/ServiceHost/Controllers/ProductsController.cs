@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using _0_Framework.Application;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using SM.Application.Contracts.ProductAgg;
 
@@ -90,17 +92,17 @@ namespace ServiceHost.Controllers
 
 
 
-        [HttpPost("createproduct"), Authorize]
-        public ActionResult<string> CreateNewProduct(CreateProductModel command)
+        [HttpPost("createproduct")]
+        public ActionResult<OperationResult> CreateNewProduct(CreateProductModel command)
         {
-            bool operation = _application.CreateNewProduct(command);
-            if (operation)
+            var result = _application.CreateNewProduct(command);
+            if (result.IsSucceded)
             {
-                return Ok("creation of the product was successful");
+                return Ok(result);
             }
             else
             {
-                return BadRequest($"creation of the product was not successful !");
+                return BadRequest(result);
             }
         }
 

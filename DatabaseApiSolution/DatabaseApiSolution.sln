@@ -27,19 +27,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AccountManagement", "Accoun
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{D408B964-CAAB-4FC5-82B6-B38C8C1931C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AM.Domain", "AM,Domain\AM.Domain.csproj", "{E2AB6CF5-BE03-441C-A906-A15754E7BCF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AM.Domain", "AM,Domain\AM.Domain.csproj", "{E2AB6CF5-BE03-441C-A906-A15754E7BCF7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{F7B131C3-8AFF-4849-AAC9-81C06562C829}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AM.Application.Contracts", "AM.Application.Contracts\AM.Application.Contracts.csproj", "{FF01CE82-0ED7-4C0D-8036-75C81746C056}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AM.Application.Contracts", "AM.Application.Contracts\AM.Application.Contracts.csproj", "{FF01CE82-0ED7-4C0D-8036-75C81746C056}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AM.Application", "AM.Application\AM.Application.csproj", "{B2D0C639-8ADA-4030-82CD-19282FCDC261}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AM.Application", "AM.Application\AM.Application.csproj", "{B2D0C639-8ADA-4030-82CD-19282FCDC261}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{6EE47B93-94B3-4393-B474-73F07FDE8CE8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AM.Infrastructure.EFCore", "AM.Infrastructure.EFCore\AM.Infrastructure.EFCore.csproj", "{BE60078C-9425-4F21-9803-C72D31FF56E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AM.Infrastructure.EFCore", "AM.Infrastructure.EFCore\AM.Infrastructure.EFCore.csproj", "{BE60078C-9425-4F21-9803-C72D31FF56E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AM.Configuration", "AM.Configuration\AM.Configuration.csproj", "{44B6DBD7-74CB-44AA-9345-E533CD5C1F28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AM.Configuration", "AM.Configuration\AM.Configuration.csproj", "{44B6DBD7-74CB-44AA-9345-E533CD5C1F28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "0_Framework", "0_Framework\0_Framework.csproj", "{C479142E-A7D5-4183-BA52-45D7AFCFB989}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +93,10 @@ Global
 		{44B6DBD7-74CB-44AA-9345-E533CD5C1F28}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44B6DBD7-74CB-44AA-9345-E533CD5C1F28}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44B6DBD7-74CB-44AA-9345-E533CD5C1F28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C479142E-A7D5-4183-BA52-45D7AFCFB989}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C479142E-A7D5-4183-BA52-45D7AFCFB989}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C479142E-A7D5-4183-BA52-45D7AFCFB989}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C479142E-A7D5-4183-BA52-45D7AFCFB989}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

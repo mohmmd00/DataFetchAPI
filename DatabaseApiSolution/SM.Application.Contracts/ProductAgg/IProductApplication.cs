@@ -1,8 +1,10 @@
-﻿namespace SM.Application.Contracts.ProductAgg
+﻿using _0_Framework.Application;
+
+namespace SM.Application.Contracts.ProductAgg
 {
     public interface IProductApplication
     {
-        bool CreateNewProduct(CreateProductModel command);
+        OperationResult CreateNewProduct(CreateProductModel command);
         ProductViewModel FetchChosenProductBy(int productid);
         List<ProductViewModel> FetchAllProducts();
         List<ProductViewModel> FetchOutOfStockProducts();

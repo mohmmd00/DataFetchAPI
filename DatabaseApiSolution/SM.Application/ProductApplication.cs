@@ -1,4 +1,5 @@
-﻿using SM.Application.Contracts.ProductAgg;
+﻿using _0_Framework.Application;
+using SM.Application.Contracts.ProductAgg;
 using SM.Domain.ProductAgg;
 
 namespace SM.Application
@@ -17,24 +18,30 @@ namespace SM.Application
             return _repository.GetCategoryNameBy(id);
         }
 
-        public bool CreateNewProduct(CreateProductModel command)
+        public OperationResult CreateNewProduct(CreateProductModel command)
         {
+            //created new instance of operation result
+            var operation = new OperationResult();
+
+
             //validation of create product model
-            bool isexist = _repository.IsProductExistsBy(command.Name);
-            bool quantityAndPrice = command.Price >= 0 && command.Quantity >= 0;
+            bool productexist = _repository.IsProductExistsBy(command.Name);
+            bool pricecheck = command.Price >= 0;
+            bool quantitycheck = command.Quantity >= 0;
+            
 
-
-            if (isexist && !quantityAndPrice)
-            {
-                return false;
-            }
+            if (productexist)
+                return operation.Failed(ApplicationMessages.DuplicatedRecord);
+            if (!pricecheck || !quantitycheck)
+                return operation.Failed(ApplicationMessages.BadInput);
             else
             {
                 var newproduct = new Product(command.Name, command.Quantity, command.Price, command.Description, command.ProductCategoryId);
 
                 _repository.CraeteNewProduct(newproduct);
                 _repository.SaveChanges();
-                return true;
+
+                return operation.Succeded(ApplicationMessages.GoodOp);
             }
 
         }
