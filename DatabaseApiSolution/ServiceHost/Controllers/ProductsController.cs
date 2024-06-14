@@ -16,9 +16,9 @@ namespace ServiceHost.Controllers
             _application = application;
         }
 
-        // GET: api/<ProductsController>
+        #region HttpGet
         [HttpGet]
-        public ActionResult<List<ProductViewModel>> GetAllProducts()
+        public ActionResult<List<ProductViewModel>> Products()
         {
             var Products = _application.FetchAllProducts();
             if (Products == null)
@@ -29,10 +29,9 @@ namespace ServiceHost.Controllers
             return Products;
         }
 
-        // GET api/<ProductsController>/
         [HttpGet("{id}")]
         [Authorize(Roles = "Admin")]
-        public ActionResult<ProductViewModel> GetSelectedProduct(int id )
+        public ActionResult<ProductViewModel> SelectProductBy(int id)
         {
 
             //input cant be negative or zero 
@@ -54,7 +53,7 @@ namespace ServiceHost.Controllers
         }
 
         [HttpGet("{id}/recommendation")]
-        public ActionResult<List<ProductViewModel>> GetRecommendationListBy(int id)
+        public ActionResult<List<ProductViewModel>> RecommendationProductsListBy(int id)
         {
             //input cant be negative or zero
             if (id <= 0)
@@ -73,7 +72,7 @@ namespace ServiceHost.Controllers
         }
 
         [HttpGet("Outofstock")]
-        public ActionResult<List<ProductViewModel>> FetchOutOfStock()
+        public ActionResult<List<ProductViewModel>> OutOfStockProducts()
         {
             var outofstockproducts = _application.FetchOutOfStockProducts();
             if (outofstockproducts == null)
@@ -85,18 +84,23 @@ namespace ServiceHost.Controllers
                 return outofstockproducts;
             }
         }
+        #endregion
 
-        [HttpPost("createproduct")]
+
+
+
+
+        [HttpPost("createproduct"), Authorize]
         public ActionResult<string> CreateNewProduct(CreateProductModel command)
         {
             bool operation = _application.CreateNewProduct(command);
             if (operation)
             {
-                return Ok("creation was successful");
+                return Ok("creation of the product was successful");
             }
             else
             {
-                return BadRequest($"creation wasnt successful !");
+                return BadRequest($"creation of the product was not successful !");
             }
         }
 

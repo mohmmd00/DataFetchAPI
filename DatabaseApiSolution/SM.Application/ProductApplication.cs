@@ -12,7 +12,7 @@ namespace SM.Application
             _repository = repository;
         }
 
-        private string FetchCtegoryName(int id)
+        private string FetchCategoryName(int id)
         {
             return _repository.GetCategoryNameBy(id);
         }
@@ -21,20 +21,20 @@ namespace SM.Application
         {
             //validation of create product model
             bool isexist = _repository.IsProductExistsBy(command.Name);
-            bool quantityAndPrice = command.Price > 0 && command.Quantity >0;
+            bool quantityAndPrice = command.Price >= 0 && command.Quantity >= 0;
 
 
-            if (!isexist && quantityAndPrice)
+            if (isexist && !quantityAndPrice)
             {
-                var newproduct = new Product(command.Name, command.Quantity, command.Price, command.Description,command.ProductCategoryId);
+                return false;
+            }
+            else
+            {
+                var newproduct = new Product(command.Name, command.Quantity, command.Price, command.Description, command.ProductCategoryId);
 
                 _repository.CraeteNewProduct(newproduct);
                 _repository.SaveChanges();
                 return true;
-            }
-            else
-            {
-                return false;
             }
 
         }
@@ -53,7 +53,7 @@ namespace SM.Application
                     Id = product.Id,
                     Name = product.Name,
                     Description = product.Description,
-                    Category = FetchCtegoryName(productid),
+                    Category = FetchCategoryName(productid),
                     Price = product.Price,
                     Quantity = product.Quantity
                 };
@@ -67,21 +67,29 @@ namespace SM.Application
         {
             var products = _repository.GetAllProducts();
             var result = new List<ProductViewModel>();
-            foreach (var product in products)
+            if (products == null)
             {
-
-                result.Add(new ProductViewModel
-                {
-                    Id = product.Id,
-                    Name = product.Name,
-                    Description = product.Description,
-                    Category = FetchCtegoryName(product.Id),
-                    Price = product.Price,
-                    Quantity = product.Quantity
-
-                });
+                return null;
             }
-            return result;
+            else
+            {
+                foreach (var product in products)
+                {
+
+                    result.Add(new ProductViewModel
+                    {
+                        Id = product.Id,
+                        Name = product.Name,
+                        Description = product.Description,
+                        Category = FetchCategoryName(product.Id),
+                        Price = product.Price,
+                        Quantity = product.Quantity
+
+                    });
+                }
+                return result;
+            }
+
         }
 
         public List<ProductViewModel> FetchOutOfStockProducts()
@@ -102,7 +110,7 @@ namespace SM.Application
                         Id = product.Id,
                         Name = product.Name,
                         Description = product.Description,
-                        Category = FetchCtegoryName(product.Id),
+                        Category = FetchCategoryName(product.Id),
                         Price = product.Price,
                         Quantity = product.Quantity
                     });
@@ -130,7 +138,7 @@ namespace SM.Application
                         Id = product.Id,
                         Name = product.Name,
                         Description = product.Description,
-                        Category = FetchCtegoryName(product.Id),
+                        Category = FetchCategoryName(product.Id),
                         Price = product.Price,
                         Quantity = product.Quantity
                     });
